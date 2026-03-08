@@ -1,3 +1,10 @@
-# Database configuration placeholder
-# This file will contain database-specific setup in database branches
-pass
+from motor.motor_asyncio import AsyncIOMotorClient
+import os
+
+MONGODB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017/myapp")
+
+client = AsyncIOMotorClient(MONGODB_URI)
+db = client.get_default_database()
+
+def get_db():
+    return db

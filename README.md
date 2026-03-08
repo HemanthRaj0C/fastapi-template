@@ -1,6 +1,6 @@
-# FastAPI Backend Template
+# FastAPI Backend Template (MongoDB)
 
-A minimal FastAPI backend template.
+FastAPI backend template with MongoDB integration.
 
 ## Quick Start
 
@@ -15,14 +15,24 @@ pip install -r requirements.txt
 # Copy environment file
 cp .env.example .env
 
+# Start MongoDB (Docker)
+docker run -d --name mongodb -p 27017:27017 mongo
+
 # Start server
 uvicorn main:app --reload --port 5000
 ```
 
 ## Available Routes
 
-- `GET /api/health` - Health check endpoint
+- `GET /api/health` - Health check
+- `GET /api/users` - Get all users
+- `GET /api/users/{id}` - Get user by ID
+- `POST /api/users` - Create user
+- `PUT /api/users/{id}` - Update user
+- `DELETE /api/users/{id}` - Delete user
 
 ## Environment Variables
 
-Copy `.env.example` to `.env` and configure as needed.
+```
+MONGODB_URI=mongodb://localhost:27017/myapp
+```
