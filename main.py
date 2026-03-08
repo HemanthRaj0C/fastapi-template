@@ -38,9 +38,17 @@ def user_helper(user) -> dict:
 
 @app.get("/api/health")
 async def health_check():
+    database = False
+    try:
+        db = get_db()
+        await db.command("ping")
+        database = True
+    except Exception:
+        pass
     return {
         "status": "ok",
-        "message": "Backend is running!"
+        "message": "Backend is running!",
+        "database": database
     }
 
 @app.get("/api/users", response_model=list[UserResponse])
