@@ -1,6 +1,6 @@
-# FastAPI Backend Template
+# FastAPI Backend Template (PostgreSQL)
 
-A minimal FastAPI backend template.
+FastAPI backend template with PostgreSQL database integration.
 
 ## Quick Start
 
@@ -15,14 +15,28 @@ pip install -r requirements.txt
 # Copy environment file
 cp .env.example .env
 
+# Start PostgreSQL (Docker)
+docker run -d --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=postgres postgres
+
 # Start server
 uvicorn main:app --reload --port 5000
 ```
 
 ## Available Routes
 
-- `GET /api/health` - Health check endpoint
+- `GET /api/health` - Health check
+- `GET /api/users` - Get all users
+- `GET /api/users/{id}` - Get user by ID
+- `POST /api/users` - Create user
+- `PUT /api/users/{id}` - Update user
+- `DELETE /api/users/{id}` - Delete user
 
 ## Environment Variables
 
-Copy `.env.example` to `.env` and configure as needed.
+```
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=myapp
+DB_USER=postgres
+DB_PASSWORD=postgres
+```
