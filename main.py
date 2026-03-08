@@ -1,10 +1,11 @@
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
+from sqlalchemy import text
 from dotenv import load_dotenv
 import os
 
-from config.database import engine, get_db, Base
+from config.database import engine, get_db, SessionLocal, Base
 from models.user import User
 from schemas.user import UserCreate, UserResponse
 
@@ -26,9 +27,18 @@ app.add_middleware(
 
 @app.get("/api/health")
 async def health_check():
+    database = False
+    try:
+        db = SessionLocal()
+        db.execute(text("SELECT 1"))
+        db.close()
+        database = True
+    except Exception:
+        pass
     return {
         "status": "ok",
-        "message": "Backend is running!"
+        "message": "Backend is running!",
+        "database": database
     }
 
 @app.get("/api/users", response_model=list[UserResponse])
