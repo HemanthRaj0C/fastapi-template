@@ -24,12 +24,7 @@ uvicorn main:app --reload --port 5000
 
 ## Available Routes
 
-- `GET /api/health` - Health check
-- `GET /api/users` - Get all users
-- `GET /api/users/{id}` - Get user by ID
-- `POST /api/users` - Create user
-- `PUT /api/users/{id}` - Update user
-- `DELETE /api/users/{id}` - Delete user
+- `GET /api/health` - Health check endpoint (includes database connectivity status)
 
 ## Environment Variables
 
